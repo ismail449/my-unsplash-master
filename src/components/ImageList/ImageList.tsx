@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Image from '../Image/Image';
 import '../../firebase';
 import { collection, getDocs, getFirestore } from 'firebase/firestore';
 import './ImageList.css';
@@ -7,6 +8,7 @@ type ImageObj = {
   url: string;
   password: string;
   id: string;
+  desc: string;
 };
 const ImageList: React.FC = () => {
   const [images, setImages] = useState<ImageObj[]>([]);
@@ -18,6 +20,7 @@ const ImageList: React.FC = () => {
       imageObj = {
         url: doc.data().url,
         password: doc.data().password,
+        desc: doc.data().desc,
         id: doc.id,
       };
       fetchedImages.push(imageObj);
@@ -30,11 +33,7 @@ const ImageList: React.FC = () => {
   return (
     <div className="image-list">
       {images.map((image) => {
-        return (
-          <figure key={image.id}>
-            <img src={image.url} />
-          </figure>
-        );
+        return <Image key={image.id} desc={image.desc} url={image.url} />;
       })}
     </div>
   );
