@@ -5,7 +5,7 @@ import Logo from '../../assets/my_unsplash_logo.svg';
 
 import './Header.css';
 
-const Header = () => {
+const Header: React.FC = () => {
   return (
     <div className="header">
       <div className="header-left">

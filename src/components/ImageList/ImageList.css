@@ -1,0 +1,23 @@
+.image-list {
+  margin-top: 75px;
+  column-count: 3;
+  column-gap: 10px;
+}
+
+.image-list figure {
+  margin: 0;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  margin-bottom: 10px;
+  break-inside: avoid;
+}
+.image-list img {
+  border-radius: 16px;
+  width: 380px;
+  height: auto;
+  display: block;
+}
+figure > img {
+  grid-row: 1 / -1;
+  grid-column: 1;
+}
