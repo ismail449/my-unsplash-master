@@ -16,23 +16,44 @@ figure > img {
   grid-column: 1;
 }
 figcaption {
-  grid-row: 2;
+  grid-row: 1;
   grid-column: 1;
   font-family: 'Montserrat';
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
   line-height: 22px;
-
-  color: #ffffff;
-  margin-left: 24px;
-  margin-bottom: 30px;
-  opacity: 0;
-}
-.image img:hover {
-  border-radius: 24px;
-  filter: brightness(0.38);
+  border-radius: 16px;
+  color: #ffffff00;
+  position: relative;
 }
 figcaption:hover {
-  opacity: 1;
+  background: rgba(0, 0, 0, 0.38);
+  color: #ffffff;
+  visibility: visible;
+}
+figcaption .image-desc {
+  position: absolute;
+  bottom: 10px;
+  left: 24px;
+}
+figcaption .image-delete {
+  display: none;
+  position: absolute;
+  right: 18px;
+  top: 18px;
+  width: 63px;
+  height: 23px;
+  border: 1px solid #eb5757;
+  border-radius: 38px;
+  font-family: 'Montserrat' sans-serif;
+  font-weight: 500;
+  font-size: 10px;
+  line-height: 12px;
+  background-color: #ffffff00;
+  color: #eb5757;
+  cursor: pointer;
+}
+figcaption:hover .image-delete {
+  display: block;
 }

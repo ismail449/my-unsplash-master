@@ -9,7 +9,13 @@ const Image: React.FC<ImageProbs> = ({ url, desc }) => {
   return (
     <figure className="image">
       <img src={url} />
-      <figcaption>{desc}</figcaption>
+
+      <figcaption>
+        <button type="submit" className="image-delete">
+          delete
+        </button>
+        <div className="image-desc">{desc}</div>
+      </figcaption>
     </figure>
   );
 };
