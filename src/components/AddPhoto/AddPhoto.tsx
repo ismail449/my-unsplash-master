@@ -1,7 +1,7 @@
 import React from 'react';
 import './AddPhoto.css';
 
-const AddPhoto = () => {
+const AddPhoto:React.FC = () => {
   return (
     <div className="add-photo">
       <button>Add a photo</button>

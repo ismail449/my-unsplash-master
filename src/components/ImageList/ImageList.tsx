@@ -1,39 +1,23 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../store/store';
 import Image from '../Image/Image';
-import '../../firebase';
-import { collection, getDocs, getFirestore } from 'firebase/firestore';
+import { ImageObj } from '../../App';
 import './ImageList.css';
 
-type ImageObj = {
-  url: string;
-  password: string;
-  id: string;
-  desc: string;
-};
 const ImageList: React.FC = () => {
-  const [images, setImages] = useState<ImageObj[]>([]);
-  const fetchImages = async () => {
-    const querySnapshot = await getDocs(collection(getFirestore(), 'photos'));
-    const fetchedImages: ImageObj[] = [];
-    let imageObj: ImageObj;
-    querySnapshot.forEach((doc) => {
-      imageObj = {
-        url: doc.data().url,
-        password: doc.data().password,
-        desc: doc.data().desc,
-        id: doc.id,
-      };
-      fetchedImages.push(imageObj);
-    });
-    setImages([...fetchedImages]);
-  };
-  useEffect(() => {
-    fetchImages();
-  }, []);
+  const images = useSelector((state: RootState) => state.image.images);
   return (
     <div className="image-list">
       {images.map((image) => {
-        return <Image key={image.id} desc={image.desc} url={image.url} />;
+        return (
+          <Image
+            key={image.id}
+            id={image.id}
+            desc={image.desc}
+            url={image.url}
+          />
+        );
       })}
     </div>
   );
