@@ -6,6 +6,7 @@ import { collection, getDocs, getFirestore } from 'firebase/firestore';
 
 import Header from './components/Header/Header';
 import ImageList from './components/ImageList/ImageList';
+import Modal from './components/Modal/Modal';
 
 import './App.css';
 
@@ -40,6 +41,14 @@ const App: React.FC = () => {
     <div className="App">
       <Header />
       <ImageList />
+      <Modal
+        labels={[
+          { label: 'Label', type: 'text' },
+          { label: 'Photo URL', type: 'url' },
+          { label: 'Password', type: 'password' },
+        ]}
+        title="Add a new photo"
+      />
     </div>
   );
 };

@@ -1,6 +1,6 @@
 import React from 'react';
 import Search from '../Search/Search';
-import AddPhoto from '../AddPhoto/AddPhoto';
+import AddImage from '../AddImage/AddImage';
 import Logo from '../../assets/my_unsplash_logo.svg';
 
 import './Header.css';
@@ -13,7 +13,7 @@ const Header: React.FC = () => {
         <Search />
       </div>
       <div>
-        <AddPhoto />
+        <AddImage />
       </div>
     </div>
   );
