@@ -7,7 +7,6 @@ import './AddImage.css';
 const AddImage: React.FC = () => {
   const dispatch = useDispatch();
   const onClickHandler = () => {
-    console.log('clicked');
     dispatch(openAddImageModal());
   };
   return (

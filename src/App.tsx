@@ -4,7 +4,14 @@ import { RootState } from './store/store';
 import { setImages } from './store/imageSlice';
 import { closeAddImageModal, closeDeleteImageModal } from './store/modalSlice';
 import './firebase';
-import { collection, getDocs, getFirestore } from 'firebase/firestore';
+import {
+  addDoc,
+  collection,
+  doc,
+  getDocs,
+  getFirestore,
+  setDoc,
+} from 'firebase/firestore';
 
 import Header from './components/Header/Header';
 import ImageList from './components/ImageList/ImageList';
@@ -45,6 +52,24 @@ const App: React.FC = () => {
   useEffect(() => {
     fetchImages();
   }, []);
+  const addImageHandler = async (data: {
+    Label: string;
+    Password: string;
+    'Photo URL': string;
+  }) => {
+    const docRef = await addDoc(collection(getFirestore(), 'photos'), {
+      desc: data.Label,
+      url: data['Photo URL'],
+      password: data.Password,
+    });
+    const newImage: ImageObj = {
+      desc: data.Label,
+      url: data['Photo URL'],
+      password: data.Password,
+      id: docRef.id,
+    };
+    console.log(newImage);
+  };
   return (
     <div className="App">
       <Header />
@@ -58,7 +83,7 @@ const App: React.FC = () => {
           ]}
           title="Add a new photo"
           buttonText="submit"
-          submitButtonHandler={() => dispatch(closeAddImageModal())}
+          submitButtonHandler={addImageHandler}
           cancelButtonHandler={() => dispatch(closeAddImageModal())}
         />
       )}

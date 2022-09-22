@@ -1,4 +1,4 @@
-import React, { FormEvent } from 'react';
+import React, { FormEvent, useState } from 'react';
 import Input from '../Input/Input';
 import Button from '../Button/Button';
 import './Modal.css';
@@ -18,8 +18,20 @@ const Modal: React.FC<ModalProps> = ({
   cancelButtonHandler,
   submitButtonHandler,
 }) => {
+  const [input, setInput] = useState({});
   const submitHandler = (event: FormEvent) => {
     event.preventDefault();
+    console.log('submitted ', input);
+    submitButtonHandler(input);
+    cancelButtonHandler();
+  };
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.currentTarget.value;
+    const name = event.currentTarget.name;
+    setInput((input) => ({
+      ...input,
+      [name]: value,
+    }));
   };
   return (
     <div className="dark-background">
@@ -27,13 +39,19 @@ const Modal: React.FC<ModalProps> = ({
         <div className="App">
           <div className="modal-header font">{title}</div>
           <div className="modal-body">
-            <form onSubmit={submitHandler}>
+            <form onSubmit={(event) => submitHandler(event)}>
               {labels.map((label) => (
                 <div key={label.label} className="modal-input">
                   <label htmlFor={label.label} className="modal-label font">
                     {label.label}
                   </label>
-                  <Input required={true} type={label.type} placeholder="" />
+                  <Input
+                    name={label.label}
+                    onChange={onChange}
+                    required={true}
+                    type={label.type}
+                    placeholder=""
+                  />
                 </div>
               ))}
               <div className="button-group">
@@ -46,7 +64,7 @@ const Modal: React.FC<ModalProps> = ({
                 <Button
                   text={buttonText}
                   color={buttonText}
-                  onClick={() => submitButtonHandler()}
+                  onClick={() => {}}
                   type="submit"
                 />
               </div>
