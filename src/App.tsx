@@ -1,16 +1,16 @@
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from './store/store';
-import { setImages } from './store/imageSlice';
+import { setImages, addImage, deleteImage } from './store/imageSlice';
 import { closeAddImageModal, closeDeleteImageModal } from './store/modalSlice';
 import './firebase';
 import {
   addDoc,
   collection,
-  doc,
   getDocs,
+  deleteDoc,
   getFirestore,
-  setDoc,
+  doc,
 } from 'firebase/firestore';
 
 import Header from './components/Header/Header';
@@ -32,6 +32,9 @@ const App: React.FC = () => {
   );
   const deleteImageModal = useSelector(
     (state: RootState) => state.modal.deleteImageModal,
+  );
+  const deletedImage = useSelector(
+    (state: RootState) => state.image.deletedImage,
   );
   const dispatch = useDispatch();
   const fetchImages = async () => {
@@ -68,7 +71,15 @@ const App: React.FC = () => {
       password: data.Password,
       id: docRef.id,
     };
-    console.log(newImage);
+    dispatch(addImage(newImage));
+  };
+  const deleteImageHandler = async (data: { Password: string }) => {
+    if (data.Password === deletedImage.password) {
+      await deleteDoc(doc(getFirestore(), 'photos', deletedImage.id));
+      dispatch(deleteImage());
+    } else {
+      console.log('password is wrong');
+    }
   };
   return (
     <div className="App">
@@ -92,7 +103,7 @@ const App: React.FC = () => {
           labels={[{ label: 'Password', type: 'password' }]}
           title="Are you sure?"
           buttonText="delete"
-          submitButtonHandler={() => dispatch(closeDeleteImageModal())}
+          submitButtonHandler={deleteImageHandler}
           cancelButtonHandler={() => dispatch(closeDeleteImageModal())}
         />
       )}

@@ -16,6 +16,7 @@ const ImageList: React.FC = () => {
             id={image.id}
             desc={image.desc}
             url={image.url}
+            password={image.password}
           />
         );
       })}

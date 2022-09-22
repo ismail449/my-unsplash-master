@@ -1,18 +1,20 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { doc, deleteDoc, getFirestore } from 'firebase/firestore';
 import { openDeleteImageModal } from '../../store/modalSlice';
+import { setDeletedImageId } from '../../store/imageSlice';
 import './Image.css';
 
 interface ImageProps {
   url: string;
   desc: string;
   id: string;
+  password: string;
 }
-const Image: React.FC<ImageProps> = ({ url, desc, id }) => {
+const Image: React.FC<ImageProps> = ({ url, desc, id, password }) => {
   const dispatch = useDispatch();
-  const deleteImage = async () => {
-    await deleteDoc(doc(getFirestore(), 'photos', id));
+  const clickHandler = () => {
+    dispatch(setDeletedImageId({ password: password, id: id }));
+    dispatch(openDeleteImageModal());
   };
   return (
     <figure className="image">
@@ -20,7 +22,7 @@ const Image: React.FC<ImageProps> = ({ url, desc, id }) => {
 
       <figcaption>
         <button
-          onClick={() => dispatch(openDeleteImageModal())}
+          onClick={() => clickHandler()}
           type="submit"
           className="image-delete"
         >
