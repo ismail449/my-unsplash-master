@@ -72,13 +72,16 @@ const App: React.FC = () => {
       id: docRef.id,
     };
     dispatch(addImage(newImage));
+    return '';
   };
   const deleteImageHandler = async (data: { Password: string }) => {
     if (data.Password === deletedImage.password) {
       await deleteDoc(doc(getFirestore(), 'photos', deletedImage.id));
       dispatch(deleteImage());
+      return '';
     } else {
       console.log('password is wrong');
+      return 'Wrong Password';
     }
   };
   return (

@@ -2,6 +2,7 @@ import React, { FormEvent, useState } from 'react';
 import Input from '../Input/Input';
 import Button from '../Button/Button';
 import './Modal.css';
+import { async } from '@firebase/util';
 
 interface ModalProps {
   title: string;
@@ -19,11 +20,16 @@ const Modal: React.FC<ModalProps> = ({
   submitButtonHandler,
 }) => {
   const [input, setInput] = useState({});
-  const submitHandler = (event: FormEvent) => {
+  const [error, setError] = useState('');
+  const submitHandler = async (event: FormEvent) => {
     event.preventDefault();
-    console.log('submitted ', input);
-    submitButtonHandler(input);
-    cancelButtonHandler();
+    const newError: Promise<string> = submitButtonHandler(input);
+    const data = await newError;
+    if (data) {
+      setError(data);
+    } else {
+      cancelButtonHandler();
+    }
   };
   const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.currentTarget.value;
@@ -71,6 +77,7 @@ const Modal: React.FC<ModalProps> = ({
             </form>
           </div>
         </div>
+        {error ? <div className="error">{error}</div> : null}
       </div>
     </div>
   );
