@@ -2,11 +2,10 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { RootState } from '../../store/store';
 import Image from '../Image/Image';
-import { ImageObj } from '../../App';
 import './ImageList.css';
 
 const ImageList: React.FC = () => {
-  const images = useSelector((state: RootState) => state.image.images);
+  const images = useSelector((state: RootState) => state.image.filteredImages);
   return (
     <div className="image-list">
       {images.map((image) => {
