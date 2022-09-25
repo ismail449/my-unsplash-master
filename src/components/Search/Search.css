@@ -10,3 +10,17 @@
   z-index: 2;
   color: #bdbdbd;
 }
+@media screen and (max-width: 750px) {
+  .search input {
+    width: 80%;
+    padding-left: 12%;
+    margin-bottom: 15px;
+  }
+  .magnifying-glass {
+    position: relative;
+    top: 40px;
+    left: 2%;
+    z-index: 2;
+    color: #bdbdbd;
+  }
+}

@@ -7,3 +7,8 @@
   display: flex;
   align-items: center;
 }
+@media screen and (max-width: 750px) {
+  .header-logo {
+    width: 40%;
+  }
+}

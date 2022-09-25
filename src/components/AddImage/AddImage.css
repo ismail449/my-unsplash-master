@@ -4,3 +4,9 @@
   line-height: 19px;
   text-transform: none;
 }
+@media screen and (max-width: 750px) {
+  .add-image button {
+    width: 115%;
+    font-size: 12px;
+  }
+}

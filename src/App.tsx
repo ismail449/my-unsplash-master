@@ -80,7 +80,6 @@ const App: React.FC = () => {
       dispatch(deleteImage());
       return '';
     } else {
-      console.log('password is wrong');
       return 'Wrong Password';
     }
   };

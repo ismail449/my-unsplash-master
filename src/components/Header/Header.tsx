@@ -9,7 +9,7 @@ const Header: React.FC = () => {
   return (
     <div className="header">
       <div className="header-left">
-        <img src={Logo} alt="my unsplash logo" />
+        <img src={Logo} className="header-logo" alt="my unsplash logo" />
         <Search />
       </div>
       <div>
