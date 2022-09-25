@@ -16,7 +16,7 @@ import {
 import Header from './components/Header/Header';
 import ImageList from './components/ImageList/ImageList';
 import Modal from './components/Modal/Modal';
-
+import Footer from './components/Footer/Footer';
 import './App.css';
 
 export type ImageObj = {
@@ -109,6 +109,7 @@ const App: React.FC = () => {
           cancelButtonHandler={() => dispatch(closeDeleteImageModal())}
         />
       )}
+      <Footer />
     </div>
   );
 };
